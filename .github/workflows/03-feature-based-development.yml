@@ -1,9 +1,6 @@
 name: Feature-based development trigger
 
-on:
-  pull:
-    branches:
-      - main
+on: [pull_request]
       
 jobs:
   train:
