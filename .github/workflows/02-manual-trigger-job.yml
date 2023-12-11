@@ -16,4 +16,4 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Trigger Azure Machine Learning job
-      run: az ml job create --file ./azure-dl-sol/src/job.yml
+      run: az ml job create --file ./azure-dl-sol/src/job.yml -g ds-cert -w ds-cert
