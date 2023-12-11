@@ -16,7 +16,4 @@ jobs:
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
     - name: Trigger Azure Machine Learning job
-      uses: azure/CLI@v1
-      with:
-        azcliversion: 2.0.72
-        inlineScript: az ml job create --file ./azure-dl-sol/src/job.yml
+      run: az ml job create --file ./azure-dl-sol/src/job.yml
