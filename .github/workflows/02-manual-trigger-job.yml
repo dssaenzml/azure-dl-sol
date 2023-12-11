@@ -24,5 +24,4 @@ jobs:
       with:
         azcliversion: 2.0.72
         inlineScript: |
-          az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
           az ml job create --file ./azure-dl-sol/src/job.yml
