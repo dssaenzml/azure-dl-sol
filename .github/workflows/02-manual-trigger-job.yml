@@ -2,7 +2,11 @@ name: Manually trigger an Azure Machine Learning job
 
 on:
   workflow_dispatch:
-
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src/job.yml
 jobs:
   train:
     runs-on: ubuntu-latest
@@ -15,7 +19,5 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
-    - name: Clone Repo
-      run: git clone https://github.com/dssaenzml/azure-dl-sol.git
     - name: Trigger Azure Machine Learning job
-      run: az ml job create --file ./azure-dl-sol/src/job.yml -g ds-cert -w ds-cert
+      run: az ml job create --file src/job.yml -g ds-cert -w ds-cert
