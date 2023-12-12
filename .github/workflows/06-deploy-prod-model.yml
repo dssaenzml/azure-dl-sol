@@ -1,0 +1,23 @@
+name: Manually trigger an Azure Machine Learning job
+
+on:
+  workflow_dispatch:
+    paths:
+      - deployment/real-time-endpoint.yml
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+    - name: Check out repo
+      uses: actions/checkout@main
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Trigger Azure Machine Learning endpoint creation
+      run: az ml online-endpoint create -f ./azure-dl-sol/deployment/real-time-endpoint.yml -g ds-cert -w ds-cert
+    - name: Trigger Azure Machine Learning deployment creation
+      run: az ml online-deployment create -f azure-dl-sol/deployment/model-deployment.yml --all-traffic -g ds-cert -w ds-cert
