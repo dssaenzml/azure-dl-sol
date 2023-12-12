@@ -3,8 +3,8 @@ name: model-deployment
 endpoint_name: end-2-end-endpoint
 model:
   name: prod-model
-  version: 1
-  path: model
+  version: latest
+  path: azureml:models/prod-model/versions/latest
   type: mlflow_model
 instance_type: Standard_DS11_V2
 instance_count: 1
